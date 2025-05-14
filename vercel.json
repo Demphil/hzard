@@ -7,12 +7,11 @@
       "config": {
         "distDir": "dist"
       }
-    }
-  ],
+    },
     {
       "src": "backend/api/*.py",
       "use": "@vercel/python",
-      "config": { 
+      "config": {
         "maxLambdaSize": "15mb",
         "runtime": "python3.9"
       }
@@ -21,28 +20,12 @@
       "src": "backend/app/routes/*.py",
       "use": "@vercel/python"
     }
-
+  ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "frontend/dist/$1"
-    }
-  ]
-}
-"routes": [
-    {
-      "src": "/(.*)",
-      "dest": "frontend/dist/$1"
-    }
-  ]
-}
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "vercel-build": "vite build --outDir dist"
-}
-
+      "src": "/api/(.*)",
+      "dest": "/backend/api/$1"
+    },
     {
       "src": "/auth/(.*)",
       "dest": "/backend/app/routes/auth_routes/$1"
