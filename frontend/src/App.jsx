@@ -1,11 +1,12 @@
 import React from 'react';
-import VideoProcessor from './components/VideoProcessor';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes';
 
 function App() {
   return (
-    <div className="app">
-      <VideoProcessor />
-    </div>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
 }
 
