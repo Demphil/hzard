@@ -21,7 +21,7 @@
       "src": "backend/app/routes/*.py",
       "use": "@vercel/python"
     }
-  ],
+
   "routes": [
     {
       "src": "/(.*)",
