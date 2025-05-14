@@ -5,44 +5,52 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "runtime": "nodejs20.x"
       }
     },
     {
-      "src": "backend/api/*.py",
+      "src": "backend/app/main.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
+        "runtime": "python3.9",
+        "includeFiles": [
+          "backend/app/**",
+          "ai_models/**"
+        ]
       }
-    },
-    {
-      "src": "backend/app/routes/*.py",
-      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/api/$1"
+      "dest": "backend/app/main.py",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
     },
     {
-      "src": "/auth/(.*)",
-      "dest": "/backend/app/routes/auth_routes/$1"
+      "src": "/ai/(.*)",
+      "dest": "backend/app/main.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/frontend/dist/$1",
+      "src": "/static/(.*)",
+      "dest": "frontend/dist/$1",
       "headers": {
-        "Cache-Control": "s-maxage=3600, stale-while-revalidate=59"
+        "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
     {
-      "src": "/_next/static/(.*)",
+      "src": "/(.*)",
+      "dest": "frontend/dist/$1",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      },
-      "continue": true
+        "Cache-Control": "s-maxage=3600, stale-while-revalidate=59"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
