@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  root: __dirname, // المسار الجذري للمشروع (frontend/)
+  root: __dirname,
   publicDir: path.resolve(__dirname, 'public'),
   plugins: [react()],
   build: {
@@ -14,12 +14,13 @@ export default defineConfig({
     }
   },
   resolve: {
+    extensions: ['.js', '.jsx', '.json'], // إضافة دعم لملفات JSX
     alias: {
-      '@': path.resolve(__dirname, 'src') // اختصار لاستيراد الملفات من src/
+      '@': path.resolve(__dirname, 'src')
     }
   },
   server: {
-    port: 3000, // يمكنك تغيير المنفذ إذا لزم الأمر
-    open: true // يفتح المتصفح تلقائياً عند بدء التشغيل
+    port: 3000,
+    open: true
   }
 })
