@@ -2,10 +2,14 @@
   "version": 2,
   "builds": [
     { "src": "frontend/package.json", "use": "@vercel/static-build" },
-    { "src": "backend/api/*.py", "use": "@vercel/python" }
+    { "src": "backend/api/*.py", "use": "@vercel/python" },
+    { "src": "backend/app/routes/*.py", "use": "@vercel/python" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/backend/api/$1" },
-    { "src": "/(.*)", "dest": "/frontend/$1" }
+    { "src": "/auth/(.*)", "dest": "/backend/app/routes/auth_routes/$1" },
+    { "src": "/(.*)", "dest": "/frontend/$1", "headers": {
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=59"
+    }}
   ]
 }
