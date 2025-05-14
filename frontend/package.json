@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "vercel-build": "vite build"  // تغيير من next build إلى vite build
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -22,8 +22,6 @@
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.1.4",
-    "vite-plugin-full-reload": "^1.0.5",  // إضافة مفيدة للتطوير
-    "vite-plugin-svgr": "^3.3.0"  // إذا كنت تستخدم SVG كReact components
+    "vite": "^5.1.4"
   }
 }
